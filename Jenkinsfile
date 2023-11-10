@@ -13,14 +13,14 @@ environment{
 }
 
     stages{
-        stage("build"){
+        stage("Build Stage"){
             steps {
-                 echo "<----------- build started ---------->"
+                 echo "<----------- Build started ---------->"
                 sh 'mvn clean deploy -Dmaven.test.skip=true'
-                 echo "<----------- build complted ---------->"
+                 echo "<----------- Build complted ---------->"
             }
         }
-        stage("test"){
+        stage("Test Stage"){
             steps{
                 echo "<----------- unit test started -------------->"
                 sh 'mvn surefire-report:report'
@@ -76,13 +76,12 @@ environment{
             }
         }
 
-        stage ("Deploy"){
+        stage(" Deploy ") {
             steps {
-                script{
-                    echo "<----------- deployig -------------->"
-                    sh "chmod +x -R ${env.WORKSPACE}"
-                    sh './deploy.sh'
-                    echo "<-------------finished -------------->"
+                script {
+                    echo '<--------------- Helm Deploy Started --------------->'
+                    sh 'helm install ttrend ttrend-0.1.0.tgz'
+                    echo '<--------------- Helm deploy Ends --------------->'
                 }
             }
         }
