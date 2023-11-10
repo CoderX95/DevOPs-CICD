@@ -1,282 +1,220 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <properties>
-    <maven.compiler.source>1.6</maven.compiler.source>
-    <maven.compiler.target>1.6</maven.compiler.target>
-  </properties>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>devops.ilp1</groupId>
-  <artifactId>ILP</artifactId>
-  <packaging>war</packaging>
-  <version>1.0.1-SNAPSHOT</version>
-  <name>ILP1UserMgmt Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-    
-    <dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-			<scope>provided</scope>
-		</dependency>
-	<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>3.5.2</version>
-			<scope>test</scope>
-		</dependency>
-<!-- 		<dependency>
-   			 <groupId>mysql</groupId>
-   			 <artifactId>mysql-connector-java</artifactId>
-    		<version>5.1.6</version>
-		</dependency> --> 
-		 <dependency>
-            <groupId>net.sourceforge.jwebunit</groupId>
-            <artifactId>jwebunit-htmlunit-plugin</artifactId>
-            <version>3.3</version>
-            <scope>test</scope>
-        </dependency>
-		
-<!-- 		<dependency>
-		    <groupId>org.seleniumhq.selenium</groupId>
-		    <artifactId>selenium-firefox-driver</artifactId>
-		    <version>3.8.1</version>
-		</dependency> -->
-  
-        <dependency>
-		    <groupId>org.slf4j</groupId>
-		    <artifactId>slf4j-simple</artifactId>
-		    <version>1.6.1</version>
-		    <scope>test</scope>
-		</dependency>
-		<dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-all</artifactId>
-		    <version>1.9.5</version>
-		    <scope>test</scope>
-		</dependency>
-		
-  </dependencies>
+
+  <groupId>com.example.maven-project</groupId>
+  <artifactId>maven-project</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>Maven Project</name>
+  <description>Sample Maven project with a working, deployable site.</description>
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
+  </properties>
+
+  <modules>
+    <module>server</module>
+    <module>webapp</module>
+  </modules>
+
+  <distributionManagement>
+    <site>
+      <id>site-server</id>
+      <name>Test Project Site</name>
+      <url>file:///tmp/maven-project-site</url>
+    </site>
+  </distributionManagement>
+
   <build>
-    <finalName>One_Click_Travel</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
 
-	<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.9.1</version>
-				<executions>
-					<execution>
-						<id>add-integration-test-sources</id>
-						<phase>generate-test-sources</phase>
-						<goals>
-							<goal>add-test-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>src/integration-test/java</source>
-							</sources>
-						</configuration>
-					</execution>
-					<execution>
-						<id>add-integration-test-resources</id>
-						<phase>generate-test-resources</phase>
-						<goals>
-							<goal>add-test-resource</goal>
-						</goals>
-						<configuration>
-							<resources>
-								<resource>
-									<filtering>true</filtering>
-									<directory>src/integration-test/resources</directory>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.18.1</version>
-				<configuration>
-					<excludedGroups>devops.ilp1.IntegrationTest</excludedGroups>
-				</configuration>
-			</plugin>
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+        </configuration>
+      </plugin>
 
+      <plugin>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <reportPlugins>
+            <plugin>
+              <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.19.1</version>
-				<configuration>
-					<includes>
-						<include>**/*.java</include>
-					</includes>
-					<groups>devops.ilp1.IntegrationTest</groups>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<port>6080</port>
-					<path>/One_Click_Travel</path>
-				</configuration>
-				<executions>
-					<execution>
-						<id>start-tomcat</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<fork>true</fork>
-						</configuration>
-					</execution>
-					<execution>
-						<id>stop-tomcat</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>shutdown</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+            <plugin>
+              <artifactId>maven-jxr-plugin</artifactId>
+            </plugin>
 
+            <plugin>
+              <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
 
-		</plugins>
-		<pluginManagement>
-			<plugins>
-				 <plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.codehaus.mojo
-										</groupId>
-										<artifactId>
-											build-helper-maven-plugin
-										</artifactId>
-										<versionRange>
-											[1.9.1,)
-										</versionRange>
-										<goals>
-											<goal>add-test-source</goal>
-											<goal>
-												add-test-resource
-											</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin> 
-				<plugin>
-					<groupId>org.apache.tomcat.maven</groupId>
-					<artifactId>tomcat7-maven-plugin</artifactId>
-					<version>2.1</version>
-					<configuration>
-						<url>http://localhost:5050/manager/text</url>
-						<server>myserver</server>
-						<path>/One_Click_Travel</path>
-                   		 <update>true</update>
-                   		 <username>admin</username>
-                   		 <password>admin</password>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>2.7</version>
-				</plugin> 
+            <plugin>
+              <artifactId>maven-pmd-plugin</artifactId>
+            </plugin>
 
-<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>3.7.1</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-project-info-reports-plugin</artifactId>
-					<version>3.0.0</version>
-				</plugin>
+            <plugin>
+              <artifactId>maven-surefire-report-plugin</artifactId>
+            </plugin>
 
-				<plugin>
-					<groupId>org.sonarsource.scanner.maven</groupId>
-					<artifactId>sonar-maven-plugin</artifactId>
-					<version>3.2</version>
-				</plugin>
+            <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>findbugs-maven-plugin</artifactId>
+            </plugin>
 
-			</plugins>
-		</pluginManagement>  
-	</build> 
+            <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>taglist-maven-plugin</artifactId>
+            </plugin>
+          </reportPlugins>
+        </configuration>
+      </plugin>
+    </plugins>
 
-<profiles>
-		<profile>
-			<id>sonar-coverage</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<build>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.jacoco</groupId>
-							<artifactId>jacoco-maven-plugin</artifactId>
-							<version>0.8.3</version>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-				<plugins>
-					<plugin>
-						<groupId>org.jacoco</groupId>
-						<artifactId>jacoco-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<goals>
-									<goal>prepare-agent</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>report</id>
-								<goals>
-									<goal>report</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>2.8</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>2.3.2</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.8</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-jxr-plugin</artifactId>
+          <version>2.3</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-pmd-plugin</artifactId>
+          <version>2.6</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>2.4</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.2.1</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>2.5</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.0</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-surefire-report-plugin</artifactId>
+          <version>2.11</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.11</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>findbugs-maven-plugin</artifactId>
+          <version>2.3.3</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>taglist-maven-plugin</artifactId>
+          <version>2.4</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.mortbay.jetty</groupId>
+          <artifactId>jetty-maven-plugin</artifactId>
+          <version>8.0.0.M1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>2.5</version>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.servlet.jsp</groupId>
+        <artifactId>jsp-api</artifactId>
+        <version>2.2</version>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit-dep</artifactId>
+        <version>4.10</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-core</artifactId>
+        <version>1.2.1</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-library</artifactId>
+        <version>1.2.1</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>1.8.5</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <scm>
+    <connection>scm:git:git@github.com:jleetutorial/maven-project.git</connection>
+    <developerConnection>scm:git:git@github.com:jleetutorial/maven-project.git</developerConnection>
+    <tag>HEAD</tag>
+    <url>http://github.com/jleetutorial/maven-project</url>
+  </scm>
+
+  <prerequisites>
+    <maven>3.0.3</maven>
+  </prerequisites>
+
 </project>
