@@ -93,7 +93,7 @@ environment{
                         ]
                     }''',
                     buildName: 'trial',
-                    buildNumber: ${env.BUILD_ID},
+                    buildNumber: "${env.BUILD_ID}",
                 )
             }
 
