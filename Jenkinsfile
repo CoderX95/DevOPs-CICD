@@ -1,4 +1,4 @@
- def registry = 'https://bitsdevops.jfrog.io'
+def registry = 'https://bitsdevops.jfrog.io'
 pipeline{
     agent{
         node {
@@ -49,7 +49,7 @@ environment{
             steps {
                 script {
                         echo '<--------------- War Publish Started --------------->'
-                        def server = Artifactory.newServer url:registry+"/artifactory" ,  credentialsId:"artifactory creds"
+                        def server = Artifactory.newServer url:registry+"/artifactory" ,  credentialsId:"art_creds"
                         def properties = "buildid=${env.BUILD_ID},commitid=${GIT_COMMIT}";
                         def uploadSpec = """{
                             "files": [
