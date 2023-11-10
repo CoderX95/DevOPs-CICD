@@ -4,7 +4,7 @@ metadata:
   name: trial-rtp
   namespace: bits
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app:  trial-rtp
