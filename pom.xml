@@ -23,7 +23,7 @@
 
   <distributionManagement>
     <repository>
-      <id>internal.repo</id>
+      <id>internal.repor</id>
       <url>file:///staging/maven-project-site</url>
     </repository>
   </distributionManagement>
