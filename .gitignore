@@ -1,1 +1,4 @@
 ./target/*
+/Terraform/*.tfstate
+/Terraform/*.tfstate.backup
+/Terraform/.*
