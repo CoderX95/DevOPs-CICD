@@ -21,7 +21,7 @@ environment{
         }
         stage('Docker container'){
             steps{
-                sh "docker run -d conatiner -p 8090:8080 demo"
+                sh "docker run -d --name conatiner -p 8090:8080 demo:latest"
             }
         }
     }
