@@ -17,7 +17,7 @@ spec:
       - name: jfrogcred
       containers:
       - name:  trial-rtp
-        image: bitsdevops.jfrog.io/libs-docker-local/trial:1.0.1
+        image: bitsdevops.jfrog.io/libs-docker-local/trial:1.0.2
         imagePullPolicy: Always
         ports:
         - containerPort: 8000

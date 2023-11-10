@@ -1,6 +1,6 @@
 def registry = 'https://bitsdevops.jfrog.io'
 def imageName = 'bitsdevops.jfrog.io/libs-docker-local/trial'
-def version   = '1.0.1'
+def version   = '1.0.2'
 
 pipeline{
     agent{
