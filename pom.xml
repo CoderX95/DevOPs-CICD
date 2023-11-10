@@ -23,7 +23,7 @@
 
   <distributionManagement>
     <repository>
-      <id>internal.repor</id>
+      <id>dev</id>
       <url>file://maven-project-site</url>
     </repository>
   </distributionManagement>
