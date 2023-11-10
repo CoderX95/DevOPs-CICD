@@ -1,13 +1,5 @@
 def registry = 'https://bitsdevops.jfrog.io'
- rtServer (
-        id: 'Artifactory-1',
-        url: 'https://bitsdevops.jfrog.io/artifactory',
-            // If you're using Credentials ID:
-            credentialsId: 'art_creds',
-            // Configure the connection timeout (in seconds).
-            // The default value (if not configured) is 300 seconds: 
-            timeout: 300
-    ) 
+
 pipeline{
     agent{
         node {
@@ -81,6 +73,15 @@ environment{
         }  */
         stage('deploy war'){
             steps{
+                 rtServer (
+                    id: 'Artifactory-1',
+                    url: 'https://bitsdevops.jfrog.io/artifactory',
+                        // If you're using Credentials ID:
+                        credentialsId: 'art_creds',
+                        // Configure the connection timeout (in seconds).
+                        // The default value (if not configured) is 300 seconds: 
+                        timeout: 300
+                ) 
                 rtUpload (
                     serverId: 'Artifactory-1',
                     spec: '''{
