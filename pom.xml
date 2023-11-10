@@ -23,7 +23,7 @@
 
   <distributionManagement>
     <repository>
-      <id>dev</id>
+      <id>internal.repo</id>
       <name>Test Project Site</name>
       <url>file://staging/maven-project-site</url>
     </repository>
