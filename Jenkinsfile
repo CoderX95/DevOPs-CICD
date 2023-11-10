@@ -13,7 +13,6 @@ environment{
 }
 
     stages{
-        stages {
         stage("build"){
             steps {
                  echo "<----------- build started ---------->"
