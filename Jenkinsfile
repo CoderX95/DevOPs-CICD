@@ -11,17 +11,32 @@ environment{
     stages{
         stage('Build'){
             steps{
+                echo "-------------------Building----------------------"
                 sh "mvn clean deploy"
             }
         }
         stage('Docker image'){
             steps{
+                echo "---------------Docker Image build----------------------"
                 sh "docker build -t demo ."
             }
         }
-        stage('Docker container'){
+        stage('SonarQube analysis') {
+            environment{
+                scannerHome = tool 'sonar scanner'
+            }
             steps{
-                sh "docker run -d --name conatiner -p 8090:8080 demo:latest"
+                echo "----------------Sonarscanner----------------------"
+                withSonarQubeEnv('sonarqube-server') 
+                sh "${scannerHome}/bin/sonar-scanner"
+            }
+        }
+        stage("Quality Gate") {
+            steps {
+                echo "----------------Quality Gate----------------------"
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true
+                }
             }
         }
     }
