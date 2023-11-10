@@ -14,5 +14,15 @@ environment{
                 sh "mvn clean deploy"
             }
         }
+        stage('Docker image'){
+            steps{
+                sh "docker build -t demo ."
+            }
+        }
+        stage('Docker container'){
+            steps{
+                sh "docker run -d conatiner -p 8090:8080 demo"
+            }
+        }
     }
 }
