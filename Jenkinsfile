@@ -68,7 +68,7 @@ environment{
         stage ("Deploy"){
             steps {
                 script{
-                    sh 'cd K8/'
+                    sh 'cd /home/ubuntu/jenkins/workspace/trial/K8/'
                     sh 'pwd'
                     sh './deploy.sh'
                 }
