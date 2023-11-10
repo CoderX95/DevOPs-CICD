@@ -87,7 +87,7 @@ environment{
                     spec: '''{
                         "files": [
                             {
-                            "pattern": "maven-project-site/(*)",
+                            "pattern": "maven-project-site/*",
                             "target": "libs-release-local/",
                             "exclusions": [ "*.sha1", "*.md5"]
                             }
