@@ -54,7 +54,7 @@ environment{
                         def uploadSpec = """{
                             "files": [
                                 {
-                                "pattern": "/maven-project-site/(*)",
+                                "pattern": "maven-project-site/(*)",
                                 "target": "libs-release-local/{1}",
                                 "flat": "false",
                                 "props" : "${properties}",
