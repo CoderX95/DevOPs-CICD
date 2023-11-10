@@ -69,7 +69,7 @@ environment{
             steps {
                 script{
                     sh 'cd K8/'
-                    sh 'chmod +x deploy.sh'
+                    sh 'pwd'
                     sh './deploy.sh'
                 }
             }
