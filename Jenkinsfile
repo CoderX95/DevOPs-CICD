@@ -68,7 +68,9 @@ environment{
         stage ("Deploy"){
             steps {
                 script{
-                    sh '. /K8/deploy.sh'
+                    cd K8/
+                    pwd
+                    sh './deploy.sh'
                 }
             }
         }
