@@ -1,4 +1,7 @@
 def registry = 'https://bitsdevops.jfrog.io'
+def server
+def rtMaven = Artifactory.newMavenBuild()
+def buildInfo
 
 pipeline{
     agent{
@@ -14,7 +17,7 @@ environment{
         stage('Build'){
             steps{
                 echo "-------------------Building----------------------"
-                sh "mvn clean deploy"
+                sh "mvn clean install"
             }
         }
         stage('Docker image'){
@@ -71,35 +74,19 @@ environment{
                 }
             }   
         }  */
-        stage('deploy war'){
-            steps{
-                 rtServer (
-                    id: 'Artifactory-1',
-                    url: 'https://bitsdevops.jfrog.io/artifactory',
-                        // If you're using Credentials ID:
-                        credentialsId: 'art_creds',
-                        // Configure the connection timeout (in seconds).
-                        // The default value (if not configured) is 300 seconds: 
-                        timeout: 300
-                ) 
-                rtUpload (
-                    serverId: 'Artifactory-1',
-                    spec: '''{
-                        "files": [
-                            {
-                            "pattern": "maven-project-site/*",
-                            "target": "libs-release-local/",
-                            "exclusions": [ "*.sha1", "*.md5"]
-                            }
-                        ]
-                    }''',
-                    buildName: 'trial',
-                    buildNumber: "${env.BUILD_ID}",
-                )
-            }
+        stage ('Artifactory configuration') {
+        // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
+        server = Artifactory.server SERVER_ID
 
-        }
-
+        // Tool name from Jenkins configuration
+        rtMaven.tool = MAVEN_TOOL
+        rtMaven.deployer releaseRepo: ARTIFACTORY_LOCAL_RELEASE_REPO, snapshotRepo: ARTIFACTORY_LOCAL_SNAPSHOT_REPO, server: server
+        rtMaven.resolver releaseRepo: ARTIFACTORY_VIRTUAL_RELEASE_REPO, snapshotRepo: ARTIFACTORY_VIRTUAL_SNAPSHOT_REPO, server: server
+        buildInfo = Artifactory.newBuildInfo()
+    }
+         stage ('Publish build info') {
+        server.publishBuildInfo buildInfo
+    }
             
     }
 }
