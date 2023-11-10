@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name:  trial-rtp-service
+  namespace: bits
+spec:
+  type: NodePort
+  selector:
+    app: trial-rtp
+  ports:
+  - nodePort: 30082
+    port: 8000
+    targetPort: 8000
