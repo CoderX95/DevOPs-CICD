@@ -1,7 +1,4 @@
 def registry = 'https://bitsdevops.jfrog.io'
-def server
-def rtMaven = Artifactory.newMavenBuild()
-def buildInfo
 
 pipeline{
     agent{
@@ -14,6 +11,9 @@ environment{
 }
 
     stages{
+        def server
+        def rtMaven = Artifactory.newMavenBuild()
+        def buildInfo
         stage('Build'){
             steps{
                 echo "-------------------Building----------------------"
