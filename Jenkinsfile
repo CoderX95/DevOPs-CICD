@@ -79,9 +79,10 @@ environment{
         stage(" Deploy ") {
             steps {
                 script {
-                    echo '<--------------- Helm Deploy Started --------------->'
-                    sh 'helm install bits-project-${BUILD_NUMBER} trial-project-0.1.0.tgz'
-                    echo '<--------------- Helm deploy Ends --------------->'
+                    echo "<----------- deployig -------------->"
+                    sh "chmod +x -R ${env.WORKSPACE}"
+                    sh './deploy.sh'
+                    echo "<-------------finished -------------->"
                 }
             }
         }
