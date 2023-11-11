@@ -1,4 +1,4 @@
-# 1 click Travel
+# Bits Project
 
 This is a small web applicaiton which contains main and test folders.  
 Main contains application code.  
