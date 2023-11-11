@@ -79,12 +79,23 @@ environment{
         stage(" Deploy ") {
             steps {
                 script {
-                    echo "<----------- deployig -------------->"
+                    echo "<----------- Kubernetes Deploy Started -------------->"
                     sh "chmod +x -R ${env.WORKSPACE}"
                     sh './deploy.sh'
-                    echo "<-------------finished -------------->"
+                    echo "<-------------Kubernetes Deploy finished -------------->"
                 }
             }
         }
+
+      /*  stage{
+            steps {
+                    script {
+                        echo '<--------------- Helm Deploy Started --------------->'
+                        sh 'helm install bits-project-${BUILD_NUMBER} trial-project-0.1.0.tgz'
+                        echo '<--------------- Helm deploy Ends --------------->'
+                    }
+                }
+        }*/
+            
     }
 }
